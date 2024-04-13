@@ -1,5 +1,5 @@
 
 body {
-    background-image: url("template/hih+.png");
+    background-image: src("template/hih+.png");
     background-repeat: repeat-y -x;
   }
