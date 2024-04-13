@@ -1,21 +1,5 @@
-.grid {
-    height: 16rem;
-    background-image:
-        linear-gradient(to right, rgb(203 213 225) 1px, transparent 1px),
-        linear-gradient(to bottom, rgb(203 213 225) 1px, transparent 1px);
-    background-size: 2.5rem 2.5rem;
-    background-position: center center;
-}
 
-.blue-square-grid-20px {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='100%' height='100%' fill='%230000ff' /%3E%3Crect x='50%' width='2' height='100%' fill='%231ff' /%3E%3Crect y='50%' width='100%' height='2' fill='%231ff' /%3E%3C/svg%3E%0A");
-  }
-  
-  .white-square-grid-40px {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='%23fff' /%3E%3Crect x='50%' width='1' height='100%' fill='%23ddd' /%3E%3Crect y='50%' width='100%' height='1' fill='%23ddd' /%3E%3C/svg%3E%0A");
-  }
-  
-  .example-box {
-    width: 100vw;
-    height: 100px;
+body {
+    background-image: url("template/hih+.png");
+    background-repeat: repeat-y -x;
   }
