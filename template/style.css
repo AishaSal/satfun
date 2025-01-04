@@ -1,10 +1,9 @@
 
 body {
-    background-image: src = ("template/hih+.png");
-    background-repeat: repeat-y -x;
-    text-align: center;
-  }
-
-P { font-family: 'Nioc Tresni', sans-serif;
-                                                }
-                                                
+  margin: 0;
+  background-image: url(../images/Background.png);
+  background-repeat: repeat;
+  background-attachment: fixed;
+  animation: fadeIn 1s;
+  font-size: 16px;
+}
