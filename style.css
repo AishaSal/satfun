@@ -1,0 +1,191 @@
+/* Base / background grid */
+body {
+  margin: 0;
+  font-family: 'Tajawal', sans-serif;
+  background-color: #f9f9fb;
+  background-image: linear-gradient(#e3e3ec 1px, transparent 1px),
+                    linear-gradient(90deg, #e3e3ec 1px, transparent 1px);
+  background-size: 40px 40px;
+  color: #222;
+  text-align: center;
+}
+
+/* Navbar */
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+.navbar a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 700;
+}
+.logo { font-size: 1.6rem; font-weight: 900; }
+.logo span { color: #ff0048; }
+
+/* Hero */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+  position: relative;
+}
+.speech {
+  background: white;
+  padding: 30px 50px;
+  border-radius: 30px;
+  font-size: 1.8rem;
+  line-height: 1.5;
+  max-width: 600px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  position: relative;
+}
+.speech::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 40px; height: 40px; background: white;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+.character { width: 330px; margin-top: 50px; }
+
+/* Cards */
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 60px 20px 30px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  border-radius: 20px;
+  width: 180px;
+  text-decoration: none;
+  color: #111;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+.card img { width: 100%; border-radius: 20px 20px 0 0; }
+.card span { padding: 10px 0 20px; font-weight: 200; }
+.card:hover { transform: translateY(-5px); }
+.card.red { background: #ff6a6a1a; }
+.card.blue { background: #6ac8ff1a; }
+.card.yellow { background: #ffe96a1a; }
+
+/* Wishlist banner */
+.wishlist { padding: 10px 20px 60px; display: flex; justify-content: center; }
+.wishlist-box {
+  display: block;
+  position: relative;
+  width: min(1100px, 92%);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 24px rgba(0,0,0,.18);
+  text-align: start;
+}
+.wishlist-box img { width: 100%; height: auto; display: block; }
+.wishlist-text {
+  position: absolute;
+  inset-inline-start: 24px;
+  inset-block-end: 20px;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(2px);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+}
+.wishlist-text .store {
+  opacity: .9;
+}
+
+/* Video section (dark strip like the screenshot) */
+.video-section {
+  background: #111216;
+  color: #fff;
+  padding: 60px 20px 80px;
+}
+.section-header {
+  display: grid;
+  place-items: center;
+  margin-bottom: 26px;
+}
+.section-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 900;
+}
+.section-header .underline {
+  width: 120px;
+  height: 3px;
+  background: #ffffff33;
+  border-radius: 2px;
+  margin-top: 10px;
+}
+.video-wrap {
+  position: relative;
+  width: min(1100px, 92%);
+  aspect-ratio: 16/9;
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 14px 28px rgba(0,0,0,.45);
+  background: #000;
+}
+.video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Footer */
+footer {
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
+
+/* Responsive tweaks */
+@media (max-width: 640px){
+  .speech { font-size: 1.4rem; padding: 24px 26px; }
+  .wishlist-text { inset-inline-start: 14px; inset-block-end: 14px; font-size: 1rem; }
+}
+
+
+/* Grid uefn educations banner */
+/* smaller spacing */
+.wishlist { padding: 10px 20px 24px; }
+
+/* control overall size by width only */
+.wishlist-box {
+  width: min(460px, 88%);   /* ↓ narrower => shorter too */
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(0,0,0,.15);
+}
+
+/* keep natural proportions */
+.wishlist-box img {
+  width: 100%;
+  height: auto;             /* <- important: no cropping */
+  display: block;
+}
+
