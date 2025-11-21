@@ -1,93 +1,339 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!doctype html>
+<html lang="en" id="htmlRoot">
 <head>
-  
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9380922654978015"
-     crossorigin="anonymous"></script>
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>satoor.fun</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Satoor — Fortnite-first Guides, Tools & Builds</title>
+  <meta name="description" content="Satoor.fun — Fortnite-focused guides, island builds, converters and handy tools. Expand to other games later." />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Fonts: Latin + Arabic -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg1: #0f172a; --bg2: #071033; }
+    body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Cairo', 'Noto Sans Arabic', sans-serif; background: linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 100%); }
+    .lang { display: none; }
+    /* small RTL helpers when Arabic is active */
+    .rtl .flip-lr { transform: scaleX(-1); }
+    /* language toggle */
+    .lang-btn { cursor:pointer }
+  </style>
+  <!-- hreflang for SEO -->
+  <link rel="alternate" href="/" hreflang="en" />
+  <link rel="alternate" href="/" hreflang="ar" />
 </head>
-<body>
-  <header>
-    <nav class="navbar">
-      <ul>
-        <li><a href="#home">الرئيسية</a></li>
-        <li><a href="https://www.fortnite.com/@satoor.fun">الجزر</a></li>
-        <li class="logo">Satoor<span>.fun</span></li>
-        <li><a href="#about">نبذة</a></li>
-        <li><a href="merch.html" target="_blank">المتجر</a></li>
+<body class="text-slate-100 antialiased" id="bodyRoot">
+  <header class="max-w-6xl mx-auto p-6 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center font-bold">SF</div>
+      <div>
+        <h1 class="text-xl font-semibold lang en">Satoor</h1>
+        <h1 class="text-xl font-semibold lang ar" lang="ar">سطور</h1>
+        <div class="text-xs text-slate-300 lang en">Fortnite-first guides • Tools • Builds</div>
+        <div class="text-xs text-slate-300 lang ar" lang="ar">محتوى فورتنايت أولاً — أدلة، أدوات وبِنايات</div>
+      </div>
+    </a>
 
-      </ul>
+    <nav class="hidden md:flex gap-4 items-center">
+      <a href="#fortnite" class="text-slate-300 hover:text-white lang en">Fortnite</a>
+      <a href="#fortnite" class="text-slate-300 hover:text-white lang ar" lang="ar">فورتنايت</a>
+
+      <a href="#tools" class="text-slate-300 hover:text-white lang en">Tools</a>
+      <a href="#tools" class="text-slate-300 hover:text-white lang ar" lang="ar">أدوات</a>
+
+      <a href="#guides" class="text-slate-300 hover:text-white lang en">Guides</a>
+      <a href="#guides" class="text-slate-300 hover:text-white lang ar" lang="ar">أدلة</a>
+
+      <a href="#other" class="text-slate-300 hover:text-white lang en">Other Games</a>
+      <a href="#other" class="text-slate-300 hover:text-white lang ar" lang="ar">ألعاب أخرى</a>
+
+      <div class="flex items-center gap-2">
+        <button class="px-3 py-2 rounded lang-btn" id="btnEn">English</button>
+        <button class="px-3 py-2 rounded lang-btn" id="btnAr">العربية</button>
+      </div>
     </nav>
+
+    <!-- Mobile compact language switch -->
+    <div class="md:hidden flex items-center gap-2">
+      <button class="px-3 py-2 rounded lang-btn" id="btnEnMobile">EN</button>
+      <button class="px-3 py-2 rounded lang-btn" id="btnArMobile">AR</button>
+    </div>
   </header>
 
-  <main>
+  <main class="max-w-6xl mx-auto p-6">
     <!-- Hero -->
-    <section id="home" class="hero">
-      <div class="speech">
-        <p>أنا مطوّرة جزر مستقلة في UEFN <br> يوتيوبر، مصممة ويب  </p>
-      </div>
-      <img src="../assets/images/satoorhero.png" alt="شخصية سطور" class="character">
-    </section>
+    <section class="grid md:grid-cols-2 gap-8 items-center py-12">
+      <div>
+        <h2 class="text-4xl font-extrabold lang en">Satoor — Fortnite-first content that scales</h2>
+        <h2 class="text-4xl font-extrabold lang ar" lang="ar">سطور — محتوى فورتنايت قابل للتوسع</h2>
 
-    <!-- Cards -->
-   <section class="cards">
-      <a href="merch.html" class="card red">
-        <img src="assets/images/merch.png" alt="المتجر">
-        <span>Online Store</span>
-      </a>
-      <a href="https://www.fortnite.com/@satoor.fun" class="card blue">
-        <img src="../assets/images/islands.png" alt="الجزر">
-        <span>islands</span>
-      </a>
-      <a href="#contact" class="card yellow">
-        <img src="../assets/images/callme.png" alt="تواصل">
-        <span>Contact</span>
-      </a>
-    </section>
+        <p class="mt-4 text-slate-300 lang en">Focused on Fortnite: builds, island showcases, tools and short how-tos. Add other games later as sections — easy to expand.</p>
+        <p class="mt-4 text-slate-300 lang ar" lang="ar">مركز على فورتنايت: بِنَيات، عروض للجزر، أدوات ودلائل قصيرة. يمكنك إضافة ألعاب أخرى لاحقًا بسهولة.</p>
 
-    <!-- Wishlist Banner (replace link and image later) -->
-    <section class="wishlist">
-      <a class="wishlist-box" href="https://uefn.satoor.fun" target="_blank" rel="noopener" aria-label="أضف اللعبة إلى قائمة الأمنيات">
-        <img src="../assets/images/codeteacher.png" alt="صورة اللعبة">
-        <div class="wishlist-text">
-          <strong> تعرف على قائمة أعمالي والدروس الخاصة </strong>
-          <span class="store">  بالـ UEFN  </span>
+        <div class="mt-6 flex gap-3">
+          <a href="#guides" class="px-4 py-2 bg-indigo-600 rounded lang en">Read Guides</a>
+          <a href="#guides" class="px-4 py-2 bg-indigo-600 rounded lang ar" lang="ar">اقرأ الأدلة</a>
+          <a href="#tools" class="px-4 py-2 border border-slate-600 rounded lang en">Try Tools</a>
+          <a href="#tools" class="px-4 py-2 border border-slate-600 rounded lang ar" lang="ar">جرّب الأدوات</a>
         </div>
-      </a>
+      </div>
+
+      <div class="p-6 bg-slate-800/40 rounded-lg">
+        <h3 class="font-semibold lang en">Featured Fortnite items</h3>
+        <h3 class="font-semibold lang ar" lang="ar">عناصر مميزة في فورتنايت</h3>
+
+        <ul class="mt-4 space-y-3 text-slate-300">
+          <li class="p-3 bg-slate-900/40 rounded lang en">Island Build: Competitive Drop Zone — <span class="text-indigo-300">Nov 2025</span></li>
+          <li class="p-3 bg-slate-900/40 rounded lang ar" lang="ar">بِنْيَة جزيرة: منطقة هبوط تنافسية — <span class="text-indigo-300">نوفمبر 2025</span></li>
+          <li class="p-3 bg-slate-900/40 rounded lang en">Sensitivity Guide: Pro settings breakdown</li>
+          <li class="p-3 bg-slate-900/40 rounded lang ar" lang="ar">دليل الحساسية: إعدادات المحترفين</li>
+          <li class="p-3 bg-slate-900/40 rounded lang en">Quick Tool: XP estimator (demo)</li>
+          <li class="p-3 bg-slate-900/40 rounded lang ar" lang="ar">أداة سريعة: مُقدِّر نقاط الخبرة (تجريبي)</li>
+        </ul>
+      </div>
     </section>
 
-    <!-- Latest Video -->
-    <section class="video-section" id="latest-video">
-      <div class="section-header">
-        <h2>أحدث فيديو</h2>
-        <span class="underline" aria-hidden="true"></span>
+    <!-- Fortnite Section -->
+    <section id="fortnite" class="py-8">
+      <h3 class="text-2xl font-bold lang en">Fortnite — Main Focus</h3>
+      <h3 class="text-2xl font-bold lang ar" lang="ar">فورتنايت — التركيز الأساسي</h3>
+
+      <div class="mt-4 grid sm:grid-cols-1 lg:grid-cols-2 gap-4">
+        <article class="p-4 bg-slate-800/40 rounded-lg">
+          <h4 class="font-semibold text-lg lang en">Island Builds & Showcases</h4>
+          <h4 class="font-semibold text-lg lang ar" lang="ar">بِنَيات الجُزر وعروضها</h4>
+          <p class="text-slate-300 text-sm mt-2 lang en">Step-by-step build guides, showcase screenshots, and UEFN tips.</p>
+          <p class="text-slate-300 text-sm mt-2 lang ar" lang="ar">دلائل خطوة بخطوة للبِنَيات، لقطات عرضية، ونصائح UEFN.</p>
+          <div class="mt-4 flex gap-2">
+            <a href="#guides" class="text-sm px-3 py-1 border rounded lang en">Browse Builds</a>
+            <a href="#guides" class="text-sm px-3 py-1 border rounded lang ar" lang="ar">تصفح البِنَيات</a>
+          </div>
+        </article>
+
+        <article class="p-4 bg-slate-800/40 rounded-lg">
+          <h4 class="font-semibold text-lg lang en">Play & Competitive Tips</h4>
+          <h4 class="font-semibold text-lg lang ar" lang="ar">نصائح اللعب والمنافسة</h4>
+          <p class="text-slate-300 text-sm mt-2 lang en">Drop spots, rotation, loadouts, and clutch plays.</p>
+          <p class="text-slate-300 text-sm mt-2 lang ar" lang="ar">نقاط الهبوط، الدوران، مجموعات الأسلحة، واللعب الحاسم.</p>
+        </article>
       </div>
-      <div class="video-wrap">
-        <!--  my channel -->
-        <iframe
-          <iframe src="https://html5.gamemonetize.co/lr8dul0s0ws9ujbpsip0387xen307y4j/" width="1334" height="750" scrolling="none" frameborder="0"></iframe>
-          title="العاب"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen
-          referrerpolicy="strict-origin-when-cross-origin">
-        </iframe>
+    </section>
+
+    <!-- Tools -->
+    <section id="tools" class="py-8">
+      <h3 class="text-2xl font-bold lang en">Tools (Fortnite-first)</h3>
+      <h3 class="text-2xl font-bold lang ar" lang="ar">أدوات (فورتنايت أولاً)</h3>
+
+      <p class="text-slate-300 text-sm mt-2 lang en">Tools increase session time and AdSense RPM. Built-in demo: XP estimator and a sensitivity converter tailored for Fortnite.</p>
+      <p class="text-slate-300 text-sm mt-2 lang ar" lang="ar">الأدوات تزيد وقت الجلسة ومعدل عائد AdSense. تجريبي: مُقدِّر الخبرة ومحَوِّل الحساسية لفورتنايت.</p>
+
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="p-4 bg-slate-800/40 rounded-lg">
+          <h4 class="font-semibold lang en">XP / Level Calculator (demo)</h4>
+          <h4 class="font-semibold lang ar" lang="ar">حاسبة النقاط / المستوى (تجريبية)</h4>
+
+          <div class="mt-4 space-y-3 text-black">
+            <label class="block lang en">Current XP
+              <input id="currentXp" type="number" value="1200" class="w-full mt-1 p-2 rounded" />
+            </label>
+            <label class="block lang ar" lang="ar">النقاط الحالية
+              <input id="currentXp_ar" type="number" value="1200" class="w-full mt-1 p-2 rounded" />
+            </label>
+
+            <label class="block lang en">XP per match
+              <input id="xpPerGame" type="number" value="150" class="w-full mt-1 p-2 rounded" />
+            </label>
+            <label class="block lang ar" lang="ar">النقاط لكل مباراة
+              <input id="xpPerGame_ar" type="number" value="150" class="w-full mt-1 p-2 rounded" />
+            </label>
+
+            <label class="block lang en">Target XP
+              <input id="targetXp" type="number" value="5000" class="w-full mt-1 p-2 rounded" />
+            </label>
+            <label class="block lang ar" lang="ar">النقاط المستهدفة
+              <input id="targetXp_ar" type="number" value="5000" class="w-full mt-1 p-2 rounded" />
+            </label>
+
+            <button id="calcBtn" class="mt-2 px-4 py-2 bg-indigo-600 rounded text-white lang en">Calculate</button>
+            <button id="calcBtn_ar" class="mt-2 px-4 py-2 bg-indigo-600 rounded text-white lang ar" lang="ar">احسب</button>
+
+            <div id="calcResult" class="mt-2 text-sm text-slate-300"></div>
+          </div>
+        </div>
+
+        <div class="p-4 bg-slate-800/40 rounded-lg">
+          <h4 class="font-semibold lang en">Fortnite Sensitivity Converter</h4>
+          <h4 class="font-semibold lang ar" lang="ar">محوِّل حساسية فورتنايت</h4>
+
+          <p class="text-slate-300 text-sm mt-2 lang en">Convert between mouse DPI / in-game sensitivity formats used by pro players.</p>
+          <p class="text-slate-300 text-sm mt-2 lang ar" lang="ar">حوّل بين دقات الفأرة وإعدادات الحساسية داخل اللعبة كما يستخدمها المحترفون.</p>
+
+          <div class="mt-3 text-black">
+            <label class="lang en">Mouse DPI
+              <input id="dpi" type="number" value="800" class="w-full mt-1 p-2 rounded" />
+            </label>
+            <label class="lang ar" lang="ar">دقة الفأرة (DPI)
+              <input id="dpi_ar" type="number" value="800" class="w-full mt-1 p-2 rounded" />
+            </label>
+
+            <label class="block mt-2 lang en">In-game sens
+              <input id="sens" type="number" value="0.08" step="0.01" class="w-full mt-1 p-2 rounded" />
+            </label>
+            <label class="block mt-2 lang ar" lang="ar">حساسية داخل اللعبة
+              <input id="sens_ar" type="number" value="0.08" step="0.01" class="w-full mt-1 p-2 rounded" />
+            </label>
+
+            <button id="convBtn" class="mt-2 px-4 py-2 bg-indigo-600 rounded text-white lang en">Convert</button>
+            <button id="convBtn_ar" class="mt-2 px-4 py-2 bg-indigo-600 rounded text-white lang ar" lang="ar">حوّل</button>
+
+            <div id="convResult" class="mt-2 text-sm text-slate-300"></div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <!-- Guides preview -->
+    <section id="guides" class="py-8">
+      <h3 class="text-2xl font-bold lang en">Featured Guides</h3>
+      <h3 class="text-2xl font-bold lang ar" lang="ar">أدلة مميزة</h3>
+
+      <div class="mt-4 grid md:grid-cols-3 gap-4">
+        <article class="p-4 bg-slate-800/40 rounded lang en">
+          <h5 class="font-semibold">Fortnite: 10 pro landing tips</h5>
+          <p class="text-slate-300 text-sm mt-2">Short actionable steps for consistent loots.</p>
+        </article>
+        <article class="p-4 bg-slate-800/40 rounded lang ar" lang="ar">
+          <h5 class="font-semibold">فورتنايت: 10 نصائح للهبوط مثل المحترفين</h5>
+          <p class="text-slate-300 text-sm mt-2">خطوات قصيرة وقابلة للتنفيذ للحصول على غنائم ثابتة.</p>
+        </article>
+
+        <article class="p-4 bg-slate-800/40 rounded lang en">
+          <h5 class="font-semibold">Fortnite: UEFN beginner walkthrough</h5>
+          <p class="text-slate-300 text-sm mt-2">How to publish your first island and test it.</p>
+        </article>
+        <article class="p-4 bg-slate-800/40 rounded lang ar" lang="ar">
+          <h5 class="font-semibold">فورتنايت: دليل المبتدئين لـ UEFN</h5>
+          <p class="text-slate-300 text-sm mt-2">كيفية نشر جزيرتك الأولى واختبارها.</p>
+        </article>
+
+        <article class="p-4 bg-slate-800/40 rounded lang en">
+          <h5 class="font-semibold">Fortnite: Sensitivity & Aim training plan</h5>
+          <p class="text-slate-300 text-sm mt-2">A simple daily routine to improve aim.</p>
+        </article>
+        <article class="p-4 bg-slate-800/40 rounded lang ar" lang="ar">
+          <h5 class="font-semibold">فورتنايت: خطة تدريب للحساسية والدقة</h5>
+          <p class="text-slate-300 text-sm mt-2">روتين يومي بسيط لتحسين دقتك.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="other" class="py-8">
+      <h3 class="text-2xl font-bold lang en">Other Games (coming)</h3>
+      <h3 class="text-2xl font-bold lang ar" lang="ar">ألعاب أخرى (قادم)</h3>
+      <p class="text-slate-300 text-sm mt-2 lang en">You’ll be able to add other games later. For now the site is optimized for Fortnite content and growth.</p>
+      <p class="text-slate-300 text-sm mt-2 lang ar" lang="ar">ستتمكن من إضافة ألعاب أخرى لاحقًا. حاليًا الموقع مُحسّن لمحتوى فورتنايت والنمو.</p>
+    </section>
+
+    <section id="contact" class="py-8">
+      <h3 class="text-2xl font-bold lang en">Contact</h3>
+      <h3 class="text-2xl font-bold lang ar" lang="ar">تواصل</h3>
+      <p class="text-slate-300 text-sm mt-2 lang en">Email: <span class="text-indigo-300">hello@satoor.fun</span> (placeholder)</p>
+      <p class="text-slate-300 text-sm mt-2 lang ar" lang="ar">البريد الإلكتروني: <span class="text-indigo-300">hello@satoor.fun</span> (نموذجي)</p>
     </section>
   </main>
 
-  <footer>
-    <p>© <span id="year"></span> satoor.fun — جميع الحقوق محفوظة</p>
-    
-    <li><a href="privacy.html">سياسة الخصوصية</a></li>
+  <footer class="max-w-6xl mx-auto p-6 text-slate-400 text-sm">© Satoor — Fortnite-first. Configure AdSense in the head when you own the domain.</footer>
 
-  </footer>
+  <script>
+    // Language switcher + RTL support
+    const supported = ['en','ar'];
+    function applyLang(lang){
+      if(!supported.includes(lang)) lang='en';
+      // show/hide elements
+      document.querySelectorAll('.lang').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.lang.'+lang).forEach(el => el.style.display = 'block');
+      // set html lang attr
+      document.documentElement.lang = lang;
+      // RTL toggles
+      if(lang === 'ar'){
+        document.body.classList.add('rtl');
+        document.documentElement.setAttribute('dir','rtl');
+        document.getElementById('bodyRoot').style.direction = 'rtl';
+        // switch font-family to prioritize Arabic font
+        document.body.style.fontFamily = "'Cairo', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
+      } else {
+        document.body.classList.remove('rtl');
+        document.documentElement.setAttribute('dir','ltr');
+        document.getElementById('bodyRoot').style.direction = 'ltr';
+        document.body.style.fontFamily = "'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Cairo', sans-serif";
+      }
+      localStorage.setItem('satoor_lang', lang);
+    }
 
-  <script src="java.js"></script>
+    // buttons
+    ['btnEn','btnAr','btnEnMobile','btnArMobile'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el){
+        el.addEventListener('click', ()=> applyLang(id.toLowerCase().includes('ar')? 'ar':'en'));
+      }
+    });
+
+    // On load: prefer saved, then navigator language
+    (function(){
+      const saved = localStorage.getItem('satoor_lang');
+      if(saved) return applyLang(saved);
+      const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+      if(nav.startsWith('ar')) applyLang('ar'); else applyLang('en');
+    })();
+
+    // XP calculator logic: sync the two language inputs and show results in the active lang
+    function getVal(id){ const el=document.getElementById(id); return el? Number(el.value)||0:0; }
+    function setVal(id,v){ const el=document.getElementById(id); if(el) el.value = v; }
+
+    document.getElementById('calcBtn')?.addEventListener('click', ()=>{
+      const current = getVal('currentXp');
+      const per = getVal('xpPerGame');
+      const target = getVal('targetXp');
+      if(per <= 0){ document.getElementById('calcResult').innerText = 'Set XP per match > 0'; return; }
+      const need = Math.max(0, target - current);
+      const games = Math.ceil(need / per);
+      document.getElementById('calcResult').innerText = need <= 0 ? 'You already reached the target 🎉' : `You need ~ ${games} matches (~${need} XP).`;
+      // sync to Arabic inputs
+      setVal('currentXp_ar', current); setVal('xpPerGame_ar', per); setVal('targetXp_ar', target);
+    });
+    document.getElementById('calcBtn_ar')?.addEventListener('click', ()=>{
+      const current = getVal('currentXp_ar');
+      const per = getVal('xpPerGame_ar');
+      const target = getVal('targetXp_ar');
+      if(per <= 0){ document.getElementById('calcResult').innerText = 'ضع نقاط > 0'; return; }
+      const need = Math.max(0, target - current);
+      const games = Math.ceil(need / per);
+      document.getElementById('calcResult').innerText = need <= 0 ? 'لقد وصلت للهدف 🎉' : `تحتاج تقريبًا ${games} مباراة (~${need} نقطة خبرة).`;
+      // sync to English inputs
+      setVal('currentXp', current); setVal('xpPerGame', per); setVal('targetXp', target);
+    });
+
+    // Sensitivity converter: simple edpi calc, sync inputs
+    function conv(dpi,sens){ return Math.round(dpi * sens); }
+    document.getElementById('convBtn')?.addEventListener('click', ()=>{
+      const dpi = getVal('dpi'); const sens = Number(document.getElementById('sens').value) || 0;
+      document.getElementById('convResult').innerText = `eDPI ≈ ${conv(dpi,sens)} (DPI × sens)`;
+      setVal('dpi_ar', dpi); setVal('sens_ar', sens);
+    });
+    document.getElementById('convBtn_ar')?.addEventListener('click', ()=>{
+      const dpi = getVal('dpi_ar'); const sens = Number(document.getElementById('sens_ar').value) || 0;
+      document.getElementById('convResult').innerText = `قيمة eDPI ≈ ${conv(dpi,sens)} (DPI × الحساسية)`;
+      setVal('dpi', dpi); setVal('sens', sens);
+    });
+
+    // Smooth anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e){
+        const id = this.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+      });
+    });
+  </script>
 </body>
 </html>
