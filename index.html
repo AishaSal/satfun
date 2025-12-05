@@ -1,26 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Feed</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fortnite Player Lookup</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header class="top">
+    <div class="lang-switch">
+      <button id="btn-en">English</button>
+      <button id="btn-ar">العربية</button>
+    </div>
+    <h1 id="title">Fortnite Player Lookup</h1>
+    <h1 id="title-ar" class="hidden">بحث لاعب فورتنايت</h1>
+  </header>
 
-<h1 class="title">Game Feed</h1>
+  <main>
+    <section class="lookup">
+      <label id="label-player">Epic Username</label>
+      <input id="player" placeholder="e.g. Ninja" />
 
-<!-- GAME CARDS -->
-<div id="game-container" class="game-container"></div>
+      <div class="platform-note" id="platform-note">Platform: Epic (fixed)</div>
+      <button id="searchBtn">Search</button>
+      <button id="clearBtn" class="muted">Clear</button>
+      <div id="message" class="muted"></div>
+    </section>
 
-<!-- POPUP WINDOW -->
-<div id="popupModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <div id="modal-body"></div>
-  </div>
-</div>
+    <section id="results" class="results"></section>
+  </main>
 
-<script src="java.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
