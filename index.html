@@ -1,35 +1,489 @@
-<!doctype html>
-<html lang="en" dir="ltr">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fortnite Player Lookup</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayZone - Free Online Games</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+        }
+        
+        .game-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .game-card:hover .play-overlay {
+            opacity: 1;
+        }
+        
+        .play-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .category-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scale(1.05);
+        }
+        
+        .modal-enter {
+            animation: modalIn 0.3s ease forwards;
+        }
+        
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .shimmer {
+            background: linear-gradient(90deg, #2a2a4a 25%, #3a3a5a 50%, #2a2a4a 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 4px;
+        }
+    </style>
 </head>
-<body>
-  <header class="top">
-    <div class="lang-switch">
-      <button id="btn-en">English</button>
-      <button id="btn-ar">العربية</button>
-    </div>
-    <h1 id="title">Fortnite Player Lookup</h1>
-    <h1 id="title-ar" class="hidden">بحث لاعب فورتنايت</h1>
-  </header>
+<body class="text-white">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-gradient-to-r from-[#1a1a2e]/95 to-[#16213e]/95 backdrop-blur-lg border-b border-white/10">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between gap-4">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                        <i class="fas fa-gamepad text-2xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-black gradient-text hidden sm:block">PlayZone</h1>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="flex-1 max-w-xl">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="searchInput"
+                            placeholder="Search games..." 
+                            class="w-full px-5 py-3 pl-12 rounded-full bg-white/10 border border-white/20 focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all"
+                        >
+                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <!-- Nav Icons -->
+                <div class="flex items-center gap-3">
+                    <button class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                    <button class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
 
-  <main>
-    <section class="lookup">
-      <label id="label-player">Epic Username</label>
-      <input id="player" placeholder="e.g. Ninja" />
-
-      <div class="platform-note" id="platform-note">Platform: Epic (fixed)</div>
-      <button id="searchBtn">Search</button>
-      <button id="clearBtn" class="muted">Clear</button>
-      <div id="message" class="muted"></div>
+    <!-- Categories -->
+    <section class="py-6 border-b border-white/10">
+        <div class="container mx-auto px-4">
+            <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" id="categories">
+                <button class="category-btn active px-5 py-2 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-category="all">
+                    <i class="fas fa-fire mr-2"></i>All Games
+                </button>
+                <button class="category-btn px-5 py-2 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-category="action">
+                    <i class="fas fa-bolt mr-2"></i>Action
+                </button>
+                <button class="category-btn px-5 py-2 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-category="puzzle">
+                    <i class="fas fa-puzzle-piece mr-2"></i>Puzzle
+                </button>
+                <button class="category-btn px-5 py-2 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-category="racing">
+                    <i class="fas fa-car mr-2"></i>Racing
+                </button>
+                <button class="category-btn px-5 py-2 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-category="sports">
+                    <i class="fas fa-futbol mr-2"></i>Sports
+                </button>
+                <button class="category-btn px-5 py-2 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-category="adventure">
+                    <i class="fas fa-mountain mr-2"></i>Adventure
+                </button>
+                <button class="category-btn px-5 py-2 rounded-full bg-white/10 font-semibold whitespace-nowrap" data-category="arcade">
+                    <i class="fas fa-ghost mr-2"></i>Arcade
+                </button>
+            </div>
+        </div>
     </section>
 
-    <section id="results" class="results"></section>
-  </main>
+    <!-- Hero Banner -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-purple-600/30 to-pink-600/30 p-8 md:p-12">
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=1200')] bg-cover bg-center opacity-20"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-5xl font-black mb-4">Play Free Games Online</h2>
+                    <p class="text-lg text-gray-300 mb-6 max-w-2xl">Discover thousands of free online games. No downloads, no login required. Just click and play!</p>
+                    <div class="flex gap-4">
+                        <button class="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-bold hover:opacity-90 transition-opacity">
+                            <i class="fas fa-play mr-2"></i>Play Now
+                        </button>
+                        <button class="px-6 py-3 bg-white/10 rounded-full font-bold hover:bg-white/20 transition-colors">
+                            <i class="fas fa-compass mr-2"></i>Explore
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script src="script.js"></script>
+    <!-- Games Grid -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold">
+                    <i class="fas fa-fire text-orange-500 mr-2"></i>Popular Games
+                </h2>
+                <span id="gameCount" class="text-gray-400">Loading...</span>
+            </div>
+            
+            <!-- Loading State -->
+            <div id="loadingState" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                <!-- Skeleton loaders will be generated here -->
+            </div>
+            
+            <!-- Games Container -->
+            <div id="gamesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 hidden">
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-10">
+                <button id="loadMoreBtn" class="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full font-bold text-lg hover:opacity-90 transition-opacity hidden">
+                    <i class="fas fa-plus mr-2"></i>Load More Games
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Modal -->
+    <div id="gameModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div class="absolute inset-4 md:inset-10 lg:inset-16 flex items-center justify-center">
+            <div class="modal-enter bg-[#1a1a2e] rounded-2xl overflow-hidden w-full h-full max-w-6xl max-h-[90vh] flex flex-col shadow-2xl border border-white/10">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between p-4 bg-gradient-to-r from-purple-600/20 to-pink-600/20 border-b border-white/10">
+                    <div class="flex items-center gap-4">
+                        <img id="modalGameIcon" src="" alt="" class="w-12 h-12 rounded-xl object-cover">
+                        <div>
+                            <h3 id="modalGameTitle" class="font-bold text-lg"></h3>
+                            <p id="modalGameCategory" class="text-sm text-gray-400"></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="toggleFullscreen()" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-colors flex items-center justify-center" title="Fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                        <button onclick="closeModal()" class="w-10 h-10 rounded-full bg-red-500/20 hover:bg-red-500/40 text-red-400 transition-colors flex items-center justify-center" title="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Game Frame -->
+                <div id="gameFrameContainer" class="flex-1 relative bg-black">
+                    <div id="gameLoader" class="absolute inset-0 flex items-center justify-center bg-[#1a1a2e]">
+                        <div class="text-center">
+                            <div class="loader mx-auto mb-4"></div>
+                            <p class="text-gray-400">Loading game...</p>
+                        </div>
+                    </div>
+                    <iframe id="gameFrame" src="" class="w-full h-full border-0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/10 mt-12">
+        <div class="container mx-auto px-4 text-center text-gray-400">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                    <i class="fas fa-gamepad text-xl"></i>
+                </div>
+                <span class="text-xl font-bold gradient-text">PlayZone</span>
+            </div>
+            <p>&copy; 2024 PlayZone. All games are property of their respective owners.</p>
+        </div>
+    </footer>
+
+    <script>
+        let allGames = [];
+        let filteredGames = [];
+        let currentPage = 1;
+        let isLoading = false;
+
+        // Generate skeleton loaders
+        function showSkeletons() {
+            const loadingState = document.getElementById('loadingState');
+            loadingState.innerHTML = Array(12).fill('').map(() => `
+                <div class="rounded-2xl overflow-hidden bg-white/5">
+                    <div class="aspect-[4/3] shimmer"></div>
+                    <div class="p-3">
+                        <div class="h-4 shimmer rounded mb-2"></div>
+                        <div class="h-3 shimmer rounded w-2/3"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Fetch games from API
+        async function fetchGames(page = 1) {
+            try {
+                isLoading = true;
+                const response = await fetch(`https://gamemonetize.com/feed.php?format=0&page=${page}`);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching games:', error);
+                return [];
+            } finally {
+                isLoading = false;
+            }
+        }
+
+        // Create game card HTML
+        function createGameCard(game) {
+            return `
+                <div class="game-card rounded-2xl overflow-hidden bg-white/5 cursor-pointer group" onclick="openGame('${encodeURIComponent(JSON.stringify(game).replace(/'/g, "\\'"))}')">
+                    <div class="aspect-[4/3] relative overflow-hidden">
+                        <img 
+                            src="${game.thumb}" 
+                            alt="${game.title}" 
+                            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                            loading="lazy"
+                            onerror="this.src='https://via.placeholder.com/400x300?text=Game'"
+                        >
+                        <div class="play-overlay absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-center justify-center">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center transform hover:scale-110 transition-transform">
+                                <i class="fas fa-play text-2xl ml-1"></i>
+                            </div>
+                        </div>
+                        <div class="absolute top-2 right-2 px-2 py-1 bg-black/60 rounded-full text-xs font-semibold backdrop-blur-sm">
+                            <i class="fas fa-gamepad mr-1"></i>${game.category || 'Game'}
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h3 class="font-bold text-sm truncate mb-1">${game.title}</h3>
+                        <p class="text-xs text-gray-400 truncate">${game.description ? game.description.substring(0, 50) + '...' : 'Play now!'}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render games to grid
+        function renderGames(games) {
+            const gamesGrid = document.getElementById('gamesGrid');
+            const loadingState = document.getElementById('loadingState');
+            
+            gamesGrid.innerHTML = games.map(game => createGameCard(game)).join('');
+            
+            loadingState.classList.add('hidden');
+            gamesGrid.classList.remove('hidden');
+            
+            document.getElementById('gameCount').textContent = `${games.length} games`;
+            document.getElementById('loadMoreBtn').classList.remove('hidden');
+        }
+
+        // Open game in modal
+        function openGame(gameData) {
+            const game = JSON.parse(decodeURIComponent(gameData));
+            const modal = document.getElementById('gameModal');
+            const frame = document.getElementById('gameFrame');
+            const loader = document.getElementById('gameLoader');
+            
+            document.getElementById('modalGameTitle').textContent = game.title;
+            document.getElementById('modalGameCategory').textContent = game.category || 'Game';
+            document.getElementById('modalGameIcon').src = game.thumb;
+            
+            loader.classList.remove('hidden');
+            frame.src = game.url;
+            
+            frame.onload = () => {
+                loader.classList.add('hidden');
+            };
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            const modal = document.getElementById('gameModal');
+            const frame = document.getElementById('gameFrame');
+            
+            modal.classList.add('hidden');
+            frame.src = '';
+            document.body.style.overflow = '';
+        }
+
+        // Toggle fullscreen
+        function toggleFullscreen() {
+            const container = document.getElementById('gameFrameContainer');
+            
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch(err => {
+                    console.log('Fullscreen error:', err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Filter games by category
+        function filterByCategory(category) {
+            if (category === 'all') {
+                filteredGames = [...allGames];
+            } else {
+                filteredGames = allGames.filter(game => 
+                    game.category && game.category.toLowerCase().includes(category.toLowerCase())
+                );
+            }
+            
+            if (filteredGames.length === 0) {
+                filteredGames = [...allGames];
+            }
+            
+            renderGames(filteredGames);
+        }
+
+        // Search games
+        function searchGames(query) {
+            if (!query.trim()) {
+                filteredGames = [...allGames];
+            } else {
+                filteredGames = allGames.filter(game => 
+                    game.title.toLowerCase().includes(query.toLowerCase()) ||
+                    (game.category && game.category.toLowerCase().includes(query.toLowerCase()))
+                );
+            }
+            renderGames(filteredGames);
+        }
+
+        // Load more games
+        async function loadMoreGames() {
+            if (isLoading) return;
+            
+            currentPage++;
+            const btn = document.getElementById('loadMoreBtn');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Loading...';
+            
+            const newGames = await fetchGames(currentPage);
+            
+            if (newGames.length > 0) {
+                allGames = [...allGames, ...newGames];
+                filteredGames = [...allGames];
+                renderGames(filteredGames);
+            }
+            
+            btn.innerHTML = '<i class="fas fa-plus mr-2"></i>Load More Games';
+        }
+
+        // Category button click handlers
+        document.getElementById('categories').addEventListener('click', (e) => {
+            const btn = e.target.closest('.category-btn');
+            if (btn) {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterByCategory(btn.dataset.category);
+            }
+        });
+
+        // Search input handler
+        let searchTimeout;
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                searchGames(e.target.value);
+            }, 300);
+        });
+
+        // Load more button handler
+        document.getElementById('loadMoreBtn').addEventListener('click', loadMoreGames);
+
+        // Escape key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Initialize
+        async function init() {
+            showSkeletons();
+            const games = await fetchGames(1);
+            allGames = games;
+            filteredGames = [...games];
+            renderGames(filteredGames);
+        }
+
+        init();
+    </script>
 </body>
 </html>
