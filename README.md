@@ -1,2 +1,0 @@
-# satfun
-for fun
