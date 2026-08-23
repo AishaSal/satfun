@@ -1,0 +1,1 @@
+# SATOOR.FUN Clean V1\n\nArabic RTL, white/minimal design, responsive and GitHub Pages ready.\n
